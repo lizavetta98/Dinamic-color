@@ -9,6 +9,17 @@ for (let i = 0; i < SQUARES_NUMBERS; i++) {
     square.addEventListener('mouseover', () => setColor(square))
     square.addEventListener('mouseleave', () => removeColor(square))
 
+    square.addEventListener('touchstart', () => setColor(square))
+    square.addEventListener('touchmove', (event) => {
+        event.preventDefault()
+        const touch = event.touches[0]
+        const target = document.elementFromPoint(touch.clientX, touch.clientY)
+        if (target && target.classList.contains('square')) {
+            setColor(target)
+        }
+    })
+    square.addEventListener('touchend', () => removeColor(square))
+
     board.append(square)
 }
 
